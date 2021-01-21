@@ -1,0 +1,20 @@
+1. serial    年轻代， 单线程gc，会STW， 标记复制
+2. serialOld 老年代， 单线程gc，会STW，标记清除整理
+3. ParNew    年轻代， 并行gc， 会STW， 标记复制
+4. ParallelOld 老年代， 并行gc， 会STW，标记清除整理
+5. CMS    老年代， 并行gc， 初始标记，FinalRemark两个阶段会STW；标记清除；低延迟
+6. G1 年轻代+老年代，并行gc， 分阶段，部分阶段会STW， 对年轻代是标记； 标记整理；追求低延迟； 把堆划分成N个Region，
+标记均使用可达性分析 从GC roots 标记方法。
+GC roots包含：1. 栈帧中局部变量 2. 方法区静态变量  3. 方法区常量的引用对象 4.JNI handler
+5. 脏卡/Rset   脏卡是 YoungGC是 可能有老年代引用年轻代对象。 空间换取时间的方式，避免扫描整个老年代
+              RemeberSet 是在G1中， 每个region有一个Rset 记录引用本Region的对象。
+
+minor gc： 年轻代gc
+major gc： 老年代gc
+full gc： 年轻代+老年代gc
+GC关注点： 年轻代gc 关注gc时间
+          老年代gc 关注使用量。 gc后使用量变化不大，可能存在内存泄露
+
+CMS、G1追求低延迟。gc暂停时间段， 但是频率高。 与ParallelOld相比，ParallelOld gc会STW，时间稍长，gc频率低
+所以ParallelOld需要更少的资源gc， 非gc时间段所有资源都用与用户线程， 吞吐量大
+gc算法没有最好，每个类型的gc都有适合的场景。 

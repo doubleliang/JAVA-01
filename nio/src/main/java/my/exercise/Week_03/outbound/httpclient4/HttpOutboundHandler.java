@@ -12,7 +12,7 @@ import my.exercise.Week_03.filter.HeaderHttpResponseFilter;
 import my.exercise.Week_03.filter.HttpRequestFilter;
 import my.exercise.Week_03.filter.HttpResponseFilter;
 import my.exercise.Week_03.router.HttpEndpointRouter;
-import my.exercise.Week_03.router.RandomHttpEndpointRouter;
+import my.exercise.Week_03.router.SequenceHttpEndpointRouter;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.concurrent.FutureCallback;
@@ -37,7 +37,7 @@ public class HttpOutboundHandler {
     private List<String> backendUrls;
 
     HttpResponseFilter filter = new HeaderHttpResponseFilter();
-    HttpEndpointRouter router = new RandomHttpEndpointRouter();
+    HttpEndpointRouter router = new SequenceHttpEndpointRouter();
 
     public HttpOutboundHandler(List<String> backends) {
 

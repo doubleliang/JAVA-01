@@ -11,7 +11,7 @@
     </parent>
     <groupId>my.zll.nio</groupId>
     <artifactId>mystarter</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
 

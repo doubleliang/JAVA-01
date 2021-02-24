@@ -1,1 +1,1 @@
-my.exercise.MyStarter
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=my.exercise.MyStarter
